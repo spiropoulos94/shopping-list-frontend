@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: auto; max-width: 1200px; padding: 30px">
+  <div>
     <div class="block">
       <span class="demonstration">Default value</span>
       <el-slider v-model="value1"></el-slider>
