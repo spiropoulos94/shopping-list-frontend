@@ -1,5 +1,5 @@
 <template>
-  <h1>
+  <div style="margin: auto; max-width: 1200px; padding: 30px">
     <div class="block">
       <span class="demonstration">Default value</span>
       <el-slider v-model="value1"></el-slider>
@@ -20,7 +20,7 @@
       <span class="demonstration">Disabled</span>
       <el-slider v-model="value5" disabled></el-slider>
     </div>
-  </h1>
+  </div>
 </template>
 
 <script>
