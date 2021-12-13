@@ -6,9 +6,14 @@ import Home from "@/components/Home";
 
 Vue.use(VueRouter);
 
-const shouldRedirect = false;
+const shouldRedirect = true;
 
 const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
   {
     path: "/",
     beforeEnter(to, from, next) {
@@ -26,11 +31,7 @@ const routes = [
     name: "login",
     component: Login,
   },
-  {
-    path: "/",
-    name: "home",
-    component: Home,
-  },
+
   {
     path: "/signup",
     name: "signup",
