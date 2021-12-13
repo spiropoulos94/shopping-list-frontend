@@ -10,6 +10,10 @@ const shouldRedirect = false;
 
 const routes = [
   {
+    path: "/",
+    redirect: "/login",
+  },
+  {
     path: "/login",
     name: "login",
     component: Login,
@@ -17,7 +21,7 @@ const routes = [
       //   if (store.state.user_data !== null) {  // edw vale to condition
       if (shouldRedirect) {
         // edw vale to condition
-        next("/");
+        next("/home");
       } else {
         next();
       }
@@ -37,7 +41,6 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
   routes,
 });
 
