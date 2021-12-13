@@ -6,26 +6,25 @@ import Home from "@/components/Home";
 
 Vue.use(VueRouter);
 
-const shouldRedirect = false;
+const shouldRedirect = true;
 
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    beforeEnter(to, from, next) {
+      //   if (store.state.user_data !== null) {  // edw vale to condition
+      if (shouldRedirect) {
+        // edw vale to condition
+        next();
+      } else {
+        next("/login");
+      }
+    },
   },
   {
     path: "/login",
     name: "login",
     component: Login,
-    beforeEnter(to, from, next) {
-      //   if (store.state.user_data !== null) {  // edw vale to condition
-      if (shouldRedirect) {
-        // edw vale to condition
-        next("/home");
-      } else {
-        next();
-      }
-    },
   },
   {
     path: "/",
