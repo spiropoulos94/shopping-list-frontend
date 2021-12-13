@@ -4,10 +4,11 @@ import Login from "@/views/auth/Login";
 import Signup from "@/views/auth/Signup";
 import Home from "@/views/Home";
 import NotFound from "@/components/NotFound";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
-const hasUser = true;
+// const store.state.user !== null = store.state.user;
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
     name: "login",
     component: Login,
     beforeEnter(to, from, next) {
-      if (hasUser) {
+      if (store.state.user !== null) {
         next("/");
       } else {
         next();
@@ -27,7 +28,7 @@ const routes = [
     name: "home",
     component: Home,
     beforeEnter(to, from, next) {
-      if (hasUser) {
+      if (store.state.user !== null) {
         next();
       } else {
         next("/login");
@@ -44,7 +45,7 @@ const routes = [
     path: "*",
     component: NotFound,
     beforeEnter(to, from, next) {
-      if (hasUser) {
+      if (store.state.user !== null) {
         next();
       } else {
         next("/");
