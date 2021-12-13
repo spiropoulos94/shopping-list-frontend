@@ -5,6 +5,7 @@ import App from "./App.vue";
 import Vuex from "vuex";
 import "es6-promise/auto";
 import router from "./router";
+import store from "./store";
 
 Vue.config.productionTip = false;
 
@@ -14,4 +15,5 @@ Vue.use(Vuex);
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount("#app");

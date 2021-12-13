@@ -7,7 +7,7 @@ import NotFound from "@/components/NotFound";
 
 Vue.use(VueRouter);
 
-const hasUser = false;
+const hasUser = true;
 
 const routes = [
   {

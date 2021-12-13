@@ -10,6 +10,9 @@ export default {
     return {};
   },
   methods: {},
+  mounted() {
+    console.log("Login mounted");
+  },
 };
 </script>
 
