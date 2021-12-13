@@ -1,12 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "@/components/auth/Login";
-import Signup from "@/components/auth/Signup";
-import Home from "@/components/Home";
+import Login from "@/views/auth/Login";
+import Signup from "@/views/auth/Signup";
+import Home from "@/views/Home";
 
 Vue.use(VueRouter);
 
-const hasUser = true;
+const hasUser = false;
 
 const routes = [
   {
