@@ -10,26 +10,28 @@ const hasUser = true;
 
 const routes = [
   {
-    path: "/home",
-    name: "home",
-    component: Home,
-  },
-  {
-    path: "/",
+    path: "/login",
+    name: "login",
+    component: Login,
     beforeEnter(to, from, next) {
-      //   if (store.state.user_data !== null) {  // edw vale to condition
       if (hasUser) {
-        // edw vale to condition
-        next("/home");
+        next("/");
       } else {
-        next("/login");
+        next();
       }
     },
   },
   {
-    path: "/login",
-    name: "login",
-    component: Login,
+    path: "/",
+    name: "home",
+    component: Home,
+    beforeEnter(to, from, next) {
+      if (hasUser) {
+        next();
+      } else {
+        next("/login");
+      }
+    },
   },
 
   {
