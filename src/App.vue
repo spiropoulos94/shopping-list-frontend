@@ -22,7 +22,5 @@ export default {
 
   margin: auto;
   max-width: 1200px;
-  background: red;
-  /* padding: 30px; */
 }
 </style>

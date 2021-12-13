@@ -6,7 +6,7 @@ import Home from "@/components/Home";
 
 Vue.use(VueRouter);
 
-const shouldRedirect = true;
+const shouldRedirect = false;
 
 const routes = [
   {
