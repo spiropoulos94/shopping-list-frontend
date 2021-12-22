@@ -53,9 +53,12 @@
 </template>
 
 <script>
+import api from "@/mixins/api";
+
 export default {
   name: "Login",
   props: {},
+  mixins: [api],
   data() {
     var validatePassConfirm = (rule, value, callback) => {
       if (value === "") {
