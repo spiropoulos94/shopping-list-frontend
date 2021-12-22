@@ -30,13 +30,23 @@
         >
         </el-input>
       </el-form-item>
+      <el-form-item prop="passwordConfirm" label="Password confirm">
+        <el-input
+          v-model="signUpData.passwordConfirm"
+          class="input-field"
+          placeholder="Password confirm"
+          clearable
+          type="password"
+        >
+        </el-input>
+      </el-form-item>
       <span class="link-wrapper">
         <router-link class="signup-link" to="/login">
           <p class="signup-msg">Already have an account? Log in</p>
         </router-link>
       </span>
       <div class="authSubmitWrapper">
-        <el-button type="primary" @click="submit"> Login </el-button>
+        <el-button type="primary" @click="submit"> Sign Up </el-button>
       </div>
     </el-form>
   </div>
@@ -47,11 +57,21 @@ export default {
   name: "Login",
   props: {},
   data() {
+    var validatePassConfirm = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please input the password again"));
+      } else if (value !== this.signUpData.password) {
+        callback(new Error("Passwords don't match!"));
+      } else {
+        callback();
+      }
+    };
     return {
       signUpData: {
         name: "",
         email: "",
         password: "",
+        passwordConfirm: "",
       },
       rules: {
         name: [
@@ -78,6 +98,14 @@ export default {
           {
             required: true,
             message: "Enter your password",
+            trigger: "blur",
+          },
+        ],
+        passwordConfirm: [
+          { validator: validatePassConfirm, trigger: "blur" },
+          {
+            required: true,
+            message: "Passwords don't match",
             trigger: "blur",
           },
         ],
