@@ -21,6 +21,11 @@
         >
         </el-input>
       </el-form-item>
+      <span class="link-wrapper">
+        <router-link class="signup-link" to="/signup">
+          <p class="signup-msg">Don't have an account? Sign up here</p>
+        </router-link>
+      </span>
       <div class="loginFormSubmitWrapper">
         <el-button type="primary" @click="submit"> Login </el-button>
       </div>
@@ -67,6 +72,7 @@ export default {
       this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
           console.log("submit ok!");
+          console.log(this.loginData);
         } else {
           return;
         }
@@ -93,5 +99,18 @@ export default {
 
 .loginFormSubmitWrapper button {
   width: 100%;
+}
+
+.signup-msg {
+  /* background-color: red; */
+  text-align: end;
+  font-size: 0.75em;
+}
+
+.link-wrapper a {
+  text-decoration: none;
+}
+.link-wrapper a:hover {
+  text-decoration: underline;
 }
 </style>
