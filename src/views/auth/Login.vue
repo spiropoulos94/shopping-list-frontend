@@ -86,31 +86,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.auth-form {
-  /* background-color: red; */
-  max-width: 600px;
-  margin: auto;
-}
-
-.input-field {
-  margin-bottom: 20px;
-}
-
-.loginFormSubmitWrapper button {
-  width: 100%;
-}
-
-.signup-msg {
-  /* background-color: red; */
-  text-align: end;
-  font-size: 0.75em;
-}
-
-.link-wrapper a {
-  text-decoration: none;
-}
-.link-wrapper a:hover {
-  text-decoration: underline;
-}
-</style>
+<style></style>

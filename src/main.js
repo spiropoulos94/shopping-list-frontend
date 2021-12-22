@@ -7,6 +7,9 @@ import "es6-promise/auto";
 import router from "./router";
 import store from "./store";
 
+//global auth stylesheets
+import "./assets/css/auth.css";
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
