@@ -26,7 +26,7 @@
           <p class="signup-msg">Don't have an account? Sign up here</p>
         </router-link>
       </span>
-      <div class="loginFormSubmitWrapper">
+      <div class="authSubmitWrapper">
         <el-button type="primary" @click="submit"> Login </el-button>
       </div>
     </el-form>
