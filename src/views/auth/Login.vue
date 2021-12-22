@@ -1,15 +1,30 @@
 <template>
   <div class="auth-form">
     <h1>Login</h1>
-    <el-input class="input-field" placeholder="Email" v-model="email" clearable>
-    </el-input>
-    <el-input
-      class="input-field"
-      placeholder="Password"
-      v-model="email"
-      clearable
-    >
-    </el-input>
+    <el-form ref="loginForm" :model="loginData" :rules="rules">
+      <el-form-item prop="email" label="Email">
+        <el-input
+          v-model="loginData.email"
+          class="input-field"
+          placeholder="Email"
+          clearable
+        >
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password" label="Password">
+        <el-input
+          v-model="loginData.password"
+          class="input-field"
+          placeholder="Password"
+          clearable
+          type="password"
+        >
+        </el-input>
+      </el-form-item>
+      <div class="loginFormSubmitWrapper">
+        <el-button type="primary" @click="submit"> Login </el-button>
+      </div>
+    </el-form>
   </div>
 </template>
 
@@ -19,10 +34,45 @@ export default {
   props: {},
   data() {
     return {
-      email: "",
+      loginData: {
+        email: "",
+        password: "",
+      },
+      rules: {
+        email: [
+          {
+            required: true,
+            message: "Enter your email",
+            trigger: "blur",
+          },
+          {
+            required: true,
+            pattern: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+            message: "Please enter a valid email",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "Enter your password",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
-  methods: {},
+  methods: {
+    submit() {
+      this.$refs.loginForm.validate(async (valid) => {
+        if (valid) {
+          console.log("submit ok!");
+        } else {
+          return;
+        }
+      });
+    },
+  },
   mounted() {
     console.log("Login mounted");
   },
@@ -39,5 +89,9 @@ export default {
 
 .input-field {
   margin-bottom: 20px;
+}
+
+.loginFormSubmitWrapper button {
+  width: 100%;
 }
 </style>
