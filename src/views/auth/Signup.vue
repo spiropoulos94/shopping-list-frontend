@@ -120,7 +120,7 @@ export default {
       this.$refs.signUpForm.validate(async (valid) => {
         if (valid) {
           console.log("submit ok!");
-          console.log(this.signUpData);
+          this.signUp(this.signUpData);
         } else {
           return;
         }

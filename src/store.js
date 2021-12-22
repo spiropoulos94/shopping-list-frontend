@@ -12,6 +12,11 @@ const store = new Vuex.Store({
       state.user = true;
     },
   },
+  getters: {
+    user(state) {
+      return state.user;
+    },
+  },
 });
 
 export default store;

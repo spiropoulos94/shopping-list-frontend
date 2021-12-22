@@ -34,9 +34,12 @@
 </template>
 
 <script>
+import api from "@/mixins/api";
+
 export default {
   name: "Login",
   props: {},
+  mixins: [api],
   data() {
     return {
       loginData: {
@@ -73,6 +76,7 @@ export default {
         if (valid) {
           console.log("submit ok!");
           console.log(this.loginData);
+          this.login(this.loginData);
         } else {
           return;
         }
