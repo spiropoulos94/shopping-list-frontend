@@ -15,7 +15,7 @@ let api = {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",what 
+        credentials: "include",
         body: JSON.stringify(data),
       });
     },
