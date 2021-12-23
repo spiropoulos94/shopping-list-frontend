@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: red">
     <h1>Hello World</h1>
     <el-button @click="logOut">Log Out</el-button>
     <router-link to="/brokenlink">Broken link</router-link>
