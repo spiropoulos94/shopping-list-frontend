@@ -1,5 +1,6 @@
 <template>
   <div class="auth-form">
+    <img alt="Vue logo" src="@/assets/logo.png" />
     <h1>Login</h1>
     <el-form ref="loginForm" :model="loginData" :rules="rules">
       <el-form-item prop="email" label="Email">
