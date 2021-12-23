@@ -16,7 +16,7 @@ const routes = [
     name: "login",
     component: Login,
     beforeEnter(to, from, next) {
-      if (store.state.user !== null) {
+      if (store.state.userIsLoggedIn) {
         next("/");
       } else {
         next();
@@ -28,7 +28,7 @@ const routes = [
     name: "home",
     component: Home,
     beforeEnter(to, from, next) {
-      if (store.state.user !== null) {
+      if (store.state.userIsLoggedIn) {
         next();
       } else {
         next("/login");
@@ -45,7 +45,7 @@ const routes = [
     path: "*",
     component: NotFound,
     beforeEnter(to, from, next) {
-      if (store.state.user !== null) {
+      if (store.state.userIsLoggedIn) {
         next();
       } else {
         next("/");
