@@ -21,6 +21,7 @@ let api = {
 
       if (responseData.token) {
         this.$store.commit("setToken", responseData.token);
+        this.getUser();
         // hydrate store user and navigate to home page
       } else if (responseData.message) {
         this.$message.error(responseData.message);
@@ -70,7 +71,7 @@ let api = {
 
         this.$store.commit("setUser", data);
 
-        this.$router.push("/");
+        this.$router.replace("/");
       } catch (e) {
         console.error(e);
       }
