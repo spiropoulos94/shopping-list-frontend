@@ -9,6 +9,7 @@ import store from "./store";
 
 //global auth stylesheets
 import "./assets/css/auth.css";
+import "./assets/css/global.css";
 
 Vue.config.productionTip = false;
 
