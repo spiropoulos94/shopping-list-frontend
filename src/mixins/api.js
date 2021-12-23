@@ -1,34 +1,55 @@
 // define a mixin object
 let api = {
   created() {
-    this.mixinTest();
+    // this.mixinTest();
   },
   methods: {
-    mixinTest() {
-      console.log("hello from mixin");
-      console.log(this.$store);
+    errorLog(type = "Authentication", message) {
+      throw { type: type, message: message };
     },
-    async signUp(data) {
-      console.log("data pou pane gia signup", data);
-      await fetch("http://localhost:3000/signup", {
+    async signUp(formData) {
+      let res = await fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
+
+      let responseData = await res.json();
+
+      if (responseData.token) {
+        this.$store.commit("setToken", responseData.token);
+        // hydrate store user and navigate to home page
+      } else if (responseData.message) {
+        this.$message.error(responseData.message);
+        this.errorLog("Authentication", responseData.message);
+      }
     },
-    async login(data) {
-      console.log("data pou pane gia login", data);
-      await fetch("http://localhost:3000/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      });
+    async login(formData) {
+      try {
+        let res = await fetch("http://localhost:3000/signin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(formData),
+        });
+
+        let responseData = await res.json();
+
+        if (responseData.token) {
+          this.$store.commit("setToken", responseData.token);
+          // hydrate store user and navigate to home page
+        } else if (responseData.message) {
+          this.$message.error(responseData.message);
+          this.errorLog("Authentication", responseData.message);
+        }
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 };

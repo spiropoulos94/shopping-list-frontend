@@ -74,8 +74,6 @@ export default {
     submit() {
       this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
-          console.log("submit ok!");
-          console.log(this.loginData);
           this.login(this.loginData);
         } else {
           return;
@@ -84,7 +82,7 @@ export default {
     },
   },
   mounted() {
-    console.log("Login mounted");
+    // console.log("Login mounted");
   },
 };
 </script>

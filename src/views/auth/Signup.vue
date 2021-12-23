@@ -119,7 +119,6 @@ export default {
     submit() {
       this.$refs.signUpForm.validate(async (valid) => {
         if (valid) {
-          console.log("submit ok!");
           this.signUp(this.signUpData);
         } else {
           return;
@@ -128,7 +127,7 @@ export default {
     },
   },
   mounted() {
-    console.log("Sign up mounted");
+    // console.log("Sign up mounted");
   },
 };
 </script>
