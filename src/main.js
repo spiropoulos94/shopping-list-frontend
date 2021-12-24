@@ -11,6 +11,9 @@ import store from "./store";
 import "./assets/css/auth.css";
 import "./assets/css/global.css";
 
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
