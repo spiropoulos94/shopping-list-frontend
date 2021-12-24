@@ -9,14 +9,38 @@
         circle
       ></el-button>
     </div>
-    <el-dialog :visible.sync="centerDialogVisible" width="40%" center>
+    <el-dialog
+      :visible.sync="centerDialogVisible"
+      :width="windowWidth < 600 ? '80%' : '40%'"
+      center
+    >
       <span>Are you sure you want to exit?</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="logOut">Confirm</el-button>
       </span>
     </el-dialog>
-    <h3>Welcome back, {{ userFirstName }}!</h3>
+    <h3 class="welcome-msg">Welcome back, {{ userFirstName }}!</h3>
+    <div class="lists-wrapper">
+      <el-card
+        shadow="hover"
+        v-for="list in shoppingLists"
+        :key="list._id"
+        class="list"
+      >
+        <h5 class="list-title">{{ list.name }}</h5>
+        <div class="truncate">
+          <span class="item-name" v-for="item in list.items" :key="item">
+            {{ item }},
+          </span>
+        </div>
+        <!-- <div class="list-items">
+          <div class="list-item">Coffee</div>
+          <div class="list-item">Milk</div>
+          <div class="list-item">Sugar</div>
+        </div> -->
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -29,6 +53,33 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
+      windowWidth: window.innerWidth,
+      shoppingLists: [
+        {
+          name: "Supermarket List",
+          items: ["Coffee", "Milk", "Sugar"],
+        },
+        {
+          name: "Groceries List",
+          items: ["Bananas", "Almonds", "Carrots"],
+        },
+        {
+          name: "Supermarket List",
+          items: ["Coffee", "Milk", "Sugar"],
+        },
+        {
+          name: "Groceries List",
+          items: ["Bananas", "Almonds", "Carrots"],
+        },
+        {
+          name: "Supermarket List",
+          items: ["Coffee", "Milk", "Sugar"],
+        },
+        {
+          name: "Groceries List",
+          items: ["Bananas", "Almonds", "Carrots"],
+        },
+      ],
     };
   },
   methods: {
@@ -39,6 +90,7 @@ export default {
   },
   mounted() {
     this.getItems();
+    console.log(window.innerWidth);
   },
   computed: {
     userFirstName() {
@@ -58,5 +110,52 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.welcome-msg {
+  /* background: green; */
+  margin-top: 30px;
+  margin-right: 20px;
+  text-align: end;
+}
+
+.lists-wrapper {
+  /* background: red; */
+  margin-top: 50px;
+  margin: 50px 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.list {
+  padding: 10px;
+  background: #409eff;
+  color: white;
+  width: 300px;
+  margin: 10px auto;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.list-title {
+  font-size: 1.35rem;
+  /* background: red; */
+  padding: 10px;
+}
+
+.item-name {
+  font-size: 0.9em;
+}
+
+.truncate {
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
