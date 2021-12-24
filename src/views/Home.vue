@@ -28,17 +28,22 @@
         :key="list._id"
         class="list"
       >
+        <!-- <div slot="header"> -->
+
         <h5 class="list-title">{{ list.name }}</h5>
+        <!-- </div> -->
+        <!-- <h5 class="list-title">{{ list.name }}</h5> -->
         <div class="truncate">
           <span class="item-name" v-for="item in list.items" :key="item">
             {{ item }},
           </span>
         </div>
-        <!-- <div class="list-items">
-          <div class="list-item">Coffee</div>
-          <div class="list-item">Milk</div>
-          <div class="list-item">Sugar</div>
-        </div> -->
+        <el-button
+          style="padding: 8px; margin-top: 20px"
+          type="danger"
+          icon="el-icon-delete"
+          circle
+        ></el-button>
       </el-card>
     </div>
   </div>
@@ -130,16 +135,17 @@ export default {
 
 .list {
   padding: 10px;
-  background: #409eff;
-  color: white;
+
   width: 300px;
   margin: 10px auto;
-  height: 130px;
+  /* height: 130px; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
+  color: #409eff;
+  background-color: white;
 }
 
 .list-title {
