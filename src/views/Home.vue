@@ -39,7 +39,15 @@
           </span>
         </div>
         <el-button
-          style="padding: 8px; margin-top: 20px"
+          @click="editList"
+          class="card-button"
+          type="primary"
+          icon="el-icon-plus"
+          circle
+        ></el-button>
+        <el-button
+          @click="deleteList"
+          class="card-button"
           type="danger"
           icon="el-icon-delete"
           circle
@@ -92,6 +100,12 @@ export default {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
     },
+    deleteList() {
+      console.log("deleteList click");
+    },
+    editList() {
+      console.log("editList click");
+    },
   },
   mounted() {
     this.getItems();
@@ -115,6 +129,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.navbar .logo {
+  font-size: 1.5em;
 }
 
 .welcome-msg {
@@ -143,7 +161,6 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  cursor: pointer;
   color: #409eff;
   background-color: white;
 }
@@ -164,5 +181,11 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   margin: auto;
+}
+
+.card-button {
+  padding: 15px;
+  margin: 10px 15px 0;
+  cursor: pointer;
 }
 </style>
