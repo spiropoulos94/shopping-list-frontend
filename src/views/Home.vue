@@ -21,6 +21,10 @@
       </span>
     </el-dialog>
     <h3 class="welcome-msg">Welcome back, {{ userFirstName }}!</h3>
+    <!-- <div class="create-list-wrapper">
+      <el-button type="primary" icon="el-icon-plus">Create new List</el-button>
+    </div> -->
+    <CreateList />
     <div class="lists-wrapper">
       <div
         @click="editList"
@@ -57,10 +61,12 @@
 
 <script>
 import api from "@/mixins/api";
+import CreateList from "@/components/CreateList";
 export default {
   name: "HelloWorld",
   props: {},
   mixins: [api],
+  components: { CreateList },
   data() {
     return {
       centerDialogVisible: false,
@@ -144,7 +150,7 @@ export default {
 .lists-wrapper {
   /* background: red; */
   margin-top: 50px;
-  margin: 50px 20px 0;
+  margin: 0px 20px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -173,6 +179,12 @@ export default {
 
 .item-name {
   font-size: 0.9em;
+}
+
+.create-list-wrapper {
+  text-align: start;
+  margin-left: 40px;
+  margin-top: 50px;
 }
 
 .truncate {
