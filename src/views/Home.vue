@@ -22,37 +22,35 @@
     </el-dialog>
     <h3 class="welcome-msg">Welcome back, {{ userFirstName }}!</h3>
     <div class="lists-wrapper">
-      <el-card
-        shadow="hover"
+      <div
+        @click="editList"
+        class="list"
         v-for="list in shoppingLists"
         :key="list._id"
-        class="list"
       >
-        <!-- <div slot="header"> -->
-
-        <h5 class="list-title">{{ list.name }}</h5>
-        <!-- </div> -->
-        <!-- <h5 class="list-title">{{ list.name }}</h5> -->
-        <div class="truncate">
-          <span class="item-name" v-for="item in list.items" :key="item">
-            {{ item }},
-          </span>
-        </div>
-        <el-button
+        <el-card shadow="hover">
+          <h5 class="list-title">{{ list.name }}</h5>
+          <div class="truncate">
+            <span class="item-name" v-for="item in list.items" :key="item">
+              {{ item }},
+            </span>
+          </div>
+          <!-- <el-button
           @click="editList"
           class="card-button"
           type="primary"
           icon="el-icon-plus"
           circle
-        ></el-button>
-        <el-button
-          @click="deleteList"
-          class="card-button"
-          type="danger"
-          icon="el-icon-delete"
-          circle
-        ></el-button>
-      </el-card>
+        ></el-button> -->
+          <el-button
+            @click="deleteList"
+            class="card-button"
+            type="danger"
+            icon="el-icon-delete"
+            circle
+          ></el-button>
+        </el-card>
+      </div>
     </div>
   </div>
 </template>
@@ -100,8 +98,9 @@ export default {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
     },
-    deleteList() {
+    deleteList(event) {
       console.log("deleteList click");
+      event.stopPropagation();
     },
     editList() {
       console.log("editList click");
@@ -151,9 +150,10 @@ export default {
   justify-content: space-between;
 }
 
-.list {
+.list,
+.list .el-card {
   padding: 10px;
-
+  cursor: pointer;
   width: 300px;
   margin: 10px auto;
   /* height: 130px; */
