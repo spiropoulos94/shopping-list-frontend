@@ -16,7 +16,7 @@
         <el-button type="primary" @click="logOut">Confirm</el-button>
       </span>
     </el-dialog>
-    <h3>Welcome back, Nikos!</h3>
+    <h3>Welcome back, {{ userFirstName }}!</h3>
   </div>
 </template>
 
@@ -39,6 +39,13 @@ export default {
   },
   mounted() {
     this.getItems();
+  },
+  computed: {
+    userFirstName() {
+      let fullName = this.$store.getters.userName;
+      let firstName = fullName.split(" ")[0];
+      return firstName;
+    },
   },
 };
 </script>
