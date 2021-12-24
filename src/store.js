@@ -8,6 +8,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     user: null,
+    items: [],
     token: null,
     userIsLoggedIn: false,
   },
@@ -19,6 +20,8 @@ const store = new Vuex.Store({
       state.userIsLoggedIn = false;
       state.user = null;
       state.token = null;
+      state.items = [];
+
       router.replace("/login");
     },
     setToken(state, token) {
@@ -27,6 +30,12 @@ const store = new Vuex.Store({
     setUser(state, user) {
       state.user = user;
       state.userIsLoggedIn = true;
+    },
+    addItem(state, item) {
+      state.items.push(item);
+    },
+    setItems(state, newItems) {
+      state.items = newItems;
     },
   },
   getters: {
@@ -38,6 +47,9 @@ const store = new Vuex.Store({
     },
     userIsLoggedIn(state) {
       return state.userIsLoggedIn;
+    },
+    items(state) {
+      return state.items;
     },
   },
   plugins: [createPersistedState()],

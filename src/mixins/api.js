@@ -76,6 +76,28 @@ let api = {
         console.error(e);
       }
     },
+    async getItems() {
+      let token = this.$store.getters.token;
+      if (!token) {
+        console.log("no token");
+        return;
+      }
+      try {
+        let res = await fetch("http://localhost:3000/api/item", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        let { data } = await res.json();
+
+        console.log(data);
+
+        this.$store.commit("setItems", data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
 };
 

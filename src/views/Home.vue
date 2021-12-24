@@ -16,13 +16,16 @@
         <el-button type="primary" @click="logOut">Confirm</el-button>
       </span>
     </el-dialog>
+    <h3>Welcome back, Nikos!</h3>
   </div>
 </template>
 
 <script>
+import api from "@/mixins/api";
 export default {
   name: "HelloWorld",
   props: {},
+  mixins: [api],
   data() {
     return {
       centerDialogVisible: false,
@@ -33,6 +36,9 @@ export default {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
     },
+  },
+  mounted() {
+    this.getItems();
   },
 };
 </script>
