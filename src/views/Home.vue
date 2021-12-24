@@ -46,13 +46,15 @@
           icon="el-icon-plus"
           circle
         ></el-button> -->
-          <el-button
-            @click="deleteList"
-            class="card-button"
-            type="danger"
-            icon="el-icon-delete"
-            circle
-          ></el-button>
+          <div class="button-wrapper">
+            <el-button
+              @click="deleteList"
+              :class="windowWidth < 500 ? 'isMobileButton' : 'isDesktopButton'"
+              type="danger"
+              icon="el-icon-delete"
+              circle
+            ></el-button>
+          </div>
         </el-card>
       </div>
     </div>
@@ -196,8 +198,21 @@ export default {
 }
 
 .card-button {
-  padding: 15px;
-  margin: 10px 15px 0;
+  /* padding: 10px; */
+  margin: 10px 0;
   cursor: pointer;
+}
+
+.button-wrapper {
+  width: 250px;
+  text-align: end;
+}
+
+.isDesktopButton {
+  padding: 10px;
+}
+.isMobileButton {
+  padding: 15px;
+  font-size: 1.3em;
 }
 </style>
