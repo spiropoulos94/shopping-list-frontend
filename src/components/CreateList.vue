@@ -12,14 +12,12 @@
         <el-form-item label="List Name" :label-width="formLabelWidth">
           <el-input v-model="formData.listName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Item" :label-width="formLabelWidth">
-          <!-- <el-select
-            v-model="formData.listItems"
-            placeholder="Please select a zone"
-          >
-            <el-option label="Zone No.1" value="shanghai"></el-option>
-            <el-option label="Zone No.2" value="beijing"></el-option>
-          </el-select> -->
+        <el-form-item label="List Items" :label-width="formLabelWidth">
+          <div>we are the list items</div>
+        </el-form-item>
+        <el-form-item label="Add Item" :label-width="formLabelWidth">
+          <el-input v-model="formData.newItem"> </el-input>
+          <el-button class="add-item-button" type="primary">Add</el-button>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -28,6 +26,7 @@
           >Save</el-button
         >
       </span>
+      <pre>{{ formData }}</pre>
     </el-dialog>
   </div>
 </template>
@@ -39,14 +38,18 @@ export default {
   data() {
     return {
       formData: {
+        newItem: "",
         listName: "",
         listItems: [
           {
-            name: "",
+            name: "random item",
+          },
+          {
+            name: "another item",
           },
         ],
       },
-      dialogVisible: false,
+      dialogVisible: true, // check
       formLabelWidth: "120px",
     };
   },
@@ -57,4 +60,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /*  */
+.add-item-button {
+  margin-top: 10px;
+  width: 100%;
+}
 </style>
