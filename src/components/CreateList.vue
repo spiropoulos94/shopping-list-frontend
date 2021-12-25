@@ -9,15 +9,36 @@
       :visible.sync="dialogVisible"
     >
       <el-form :model="formData">
-        <el-form-item label="List Name" :label-width="formLabelWidth">
+        <el-form-item label="List Name">
           <el-input v-model="formData.listName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="List Items" :label-width="formLabelWidth">
-          <div>we are the list items</div>
-        </el-form-item>
-        <el-form-item label="Add Item" :label-width="formLabelWidth">
+        <!-- <el-form-item label="List Items">
+          <div class="items-list">
+            <span
+              v-for="(item, iindex) in formData.listItems"
+              v-bind:key="iindex"
+              >{{ item.name }}</span
+            >
+          </div>
+        </el-form-item> -->
+        <h2>Items</h2>
+        <div class="items-list">
+          <span
+            class="list-item"
+            v-for="(item, iindex) in formData.listItems"
+            v-bind:key="iindex"
+          >
+            {{ item.name }}
+          </span>
+        </div>
+        <el-form-item label="Add Item">
           <el-input v-model="formData.newItem"> </el-input>
-          <el-button class="add-item-button" type="primary">Add</el-button>
+          <el-button
+            class="add-item-button"
+            @click="addItemToList"
+            type="primary"
+            >Add</el-button
+          >
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -26,7 +47,7 @@
           >Save</el-button
         >
       </span>
-      <pre>{{ formData }}</pre>
+      <!-- <pre>{{ formData }}</pre> -->
     </el-dialog>
   </div>
 </template>
@@ -50,10 +71,17 @@ export default {
         ],
       },
       dialogVisible: true, // check
-      formLabelWidth: "120px",
     };
   },
-  methods: {},
+  methods: {
+    addItemToList() {
+      this.formData.listItems.push({
+        name: this.formData.newItem,
+      });
+
+      this.formData.newItem = "";
+    },
+  },
 };
 </script>
 
@@ -63,5 +91,21 @@ export default {
 .add-item-button {
   margin-top: 10px;
   width: 100%;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  display: flex;
+}
+
+.list-item {
+  /* border: 1px solid red; */
+  padding: 10px;
+  text-align: end;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 </style>
