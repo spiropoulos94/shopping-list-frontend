@@ -22,15 +22,41 @@
             >
           </div>
         </el-form-item> -->
-        <h2>Items</h2>
+        <div class="list-bar">
+          <h2>Items</h2>
+          <el-button
+            @click="deleteEnabled = true"
+            v-if="!deleteEnabled"
+            type="primary"
+            icon="el-icon-edit"
+            circle
+          ></el-button>
+          <el-button
+            @click="deleteEnabled = false"
+            v-if="deleteEnabled && formData.listItems.length"
+            type="primary"
+            icon="el-icon-close"
+            circle
+          ></el-button>
+        </div>
         <div class="items-list">
-          <span
-            class="list-item"
+          <div
+            class="list-item-wrapper"
             v-for="(item, iindex) in formData.listItems"
             v-bind:key="iindex"
           >
-            {{ item.name }}
-          </span>
+            <span class="list-item">
+              {{ item.name }}
+            </span>
+            <el-button
+              @click="deleteItem(iindex)"
+              v-if="deleteEnabled"
+              type="danger"
+              icon="el-icon-delete"
+              size="small"
+              circle
+            ></el-button>
+          </div>
         </div>
         <el-form-item label="Add Item">
           <el-input v-model="formData.newItem"> </el-input>
@@ -72,15 +98,24 @@ export default {
         ],
       },
       dialogVisible: true, // check
+      deleteEnabled: false,
     };
   },
   methods: {
+    deleteItem(itemIndex) {
+      this.formData.listItems.splice(itemIndex, 1);
+      if (!this.formData.listItems.length) {
+        this.deleteEnabled = false;
+      }
+    },
     addItemToList() {
-      this.formData.listItems.push({
-        name: this.formData.newItem,
-      });
+      if (this.formData.newItem.trim() !== "") {
+        this.formData.listItems.push({
+          name: this.formData.newItem,
+        });
 
-      this.formData.newItem = "";
+        this.formData.newItem = "";
+      }
     },
   },
 };
@@ -94,11 +129,12 @@ export default {
   width: 100%;
 }
 
-.items-list {
+.list-item-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   /* border: 1px solid red; */
   display: flex;
+  align-items: center;
 }
 
 .list-item {
@@ -106,8 +142,12 @@ export default {
   padding: 10px;
   text-align: end;
   width: 100%;
-  margin-bottom: 10px;
   font-size: 1.2em;
+}
+
+.list-bar {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
 
