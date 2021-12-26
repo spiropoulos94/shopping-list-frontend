@@ -4,6 +4,7 @@
       >Create new List</el-button
     >
     <el-dialog
+      class="create-list-dialog"
       width="90%"
       title="Create new shopping list"
       :visible.sync="dialogVisible"
@@ -107,5 +108,11 @@ export default {
   width: 100%;
   margin-bottom: 10px;
   font-size: 1.2em;
+}
+</style>
+
+<style>
+.create-list-wrapper .el-dialog {
+  max-width: 700px;
 }
 </style>
