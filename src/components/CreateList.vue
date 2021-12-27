@@ -93,7 +93,9 @@
 import api from "@/mixins/api";
 export default {
   name: "CreateList",
-  props: {},
+  props: {
+    listToBeEdited: Object,
+  },
   mixins: [api],
   data() {
     return {
@@ -115,6 +117,15 @@ export default {
         } else {
           this.$emit("listDeleteStatusChanged", false);
         }
+      },
+    },
+    listToBeEdited: {
+      handler(list) {
+        console.log("list to be edited", list);
+
+        this.formData.listName = list.name;
+        this.formData.listItems = list.items;
+        this.dialogVisible = true;
       },
     },
   },

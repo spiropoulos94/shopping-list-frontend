@@ -23,13 +23,16 @@
     <!-- <div class="create-list-wrapper">
       <el-button type="primary" icon="el-icon-plus">Create new List</el-button>
     </div> -->
-    <CreateList @listDeleteStatusChanged="setDeleteStatus" />
+    <CreateList
+      @listDeleteStatusChanged="setDeleteStatus"
+      :listToBeEdited="listToBeEdited"
+    />
     <div class="lists-wrapper">
       <div
-        @click="editList"
         class="list"
         v-for="list in $store.getters.lists"
         :key="list._id"
+        @click="editList(list)"
       >
         <el-card shadow="hover">
           <h5 class="list-title">{{ list.name }}</h5>
@@ -74,6 +77,7 @@ export default {
       centerDialogVisible: false,
       windowWidth: window.innerWidth,
       listDeleteStatus: false,
+      listToBeEdited: null,
     };
   },
   methods: {
@@ -90,8 +94,9 @@ export default {
       this.getLists();
       event.stopPropagation();
     },
-    editList() {
-      console.log("editList click");
+    editList(list) {
+      console.log("editList click", { list });
+      this.listToBeEdited = list;
     },
   },
   mounted() {
