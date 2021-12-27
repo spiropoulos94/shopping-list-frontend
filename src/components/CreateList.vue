@@ -3,6 +3,18 @@
     <el-button @click="dialogVisible = true" type="primary" icon="el-icon-plus"
       >Create new List</el-button
     >
+    <el-button
+      v-if="!listDeleteEnabled"
+      type="danger"
+      icon="el-icon-delete"
+      @click="listDeleteEnabled = true"
+    ></el-button>
+    <el-button
+      v-if="listDeleteEnabled"
+      type="danger"
+      icon="el-icon-close"
+      @click="listDeleteEnabled = false"
+    ></el-button>
     <el-dialog
       class="create-list-dialog"
       width="90%"
@@ -92,19 +104,34 @@ export default {
       },
       dialogVisible: false,
       deleteEnabled: false,
+      listDeleteEnabled: false,
     };
+  },
+  watch: {
+    listDeleteEnabled: {
+      handler(value) {
+        if (value === true) {
+          this.$emit("listDeleteStatusChanged", true);
+        } else {
+          this.$emit("listDeleteStatusChanged", false);
+        }
+      },
+    },
   },
   methods: {
     submit() {
-      console.log("submited");
-      console.log(this.formData);
-      this.createList({
-        name: this.formData.listName,
-        notes: this.formData.notes || "",
-        items: this.formData.listItems,
-      });
-      this.getLists();
-      this.dialogVisible = false;
+      if (
+        this.formData.listItems.length &&
+        this.formData.listName.trim() !== ""
+      ) {
+        this.createList({
+          name: this.formData.listName,
+          notes: this.formData.notes || "",
+          items: this.formData.listItems,
+        });
+        this.getLists();
+        this.dialogVisible = false;
+      }
     },
     deleteItem(itemIndex) {
       this.formData.listItems.splice(itemIndex, 1);

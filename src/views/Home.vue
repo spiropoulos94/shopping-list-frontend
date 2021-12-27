@@ -23,7 +23,7 @@
     <!-- <div class="create-list-wrapper">
       <el-button type="primary" icon="el-icon-plus">Create new List</el-button>
     </div> -->
-    <CreateList />
+    <CreateList @listDeleteStatusChanged="setDeleteStatus" />
     <div class="lists-wrapper">
       <div
         @click="editList"
@@ -47,6 +47,7 @@
         ></el-button> -->
           <div class="button-wrapper">
             <el-button
+              v-if="listDeleteStatus"
               @click="deleteList"
               :class="windowWidth < 500 ? 'isMobileButton' : 'isDesktopButton'"
               type="danger"
@@ -72,9 +73,13 @@ export default {
     return {
       centerDialogVisible: false,
       windowWidth: window.innerWidth,
+      listDeleteStatus: false,
     };
   },
   methods: {
+    setDeleteStatus(value) {
+      this.listDeleteStatus = value;
+    },
     logOut() {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
@@ -156,8 +161,8 @@ export default {
 }
 
 .create-list-wrapper {
-  text-align: start;
-  margin-left: 40px;
+  text-align: end;
+  margin-right: 40px;
   margin-top: 50px;
 }
 
