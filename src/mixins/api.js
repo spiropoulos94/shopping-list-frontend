@@ -83,7 +83,7 @@ let api = {
         return;
       }
       try {
-        let res = await fetch("http://localhost:3000/api/item", {
+        let res = await fetch("http://localhost:3000/api/list", {
           headers: {
             Authorization: "Bearer " + token,
           },
