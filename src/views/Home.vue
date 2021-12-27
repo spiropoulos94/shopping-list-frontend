@@ -23,10 +23,7 @@
     <!-- <div class="create-list-wrapper">
       <el-button type="primary" icon="el-icon-plus">Create new List</el-button>
     </div> -->
-    <CreateList
-      @listDeleteStatusChanged="setDeleteStatus"
-      :listToBeEdited="listToBeEdited"
-    />
+    <CreateList ref="CreateList" @listDeleteStatusChanged="setDeleteStatus" />
     <div class="lists-wrapper">
       <div
         class="list"
@@ -96,7 +93,13 @@ export default {
     },
     editList(list) {
       console.log("editList click", { list });
-      this.listToBeEdited = list;
+
+      this.$refs.CreateList.dialogVisible = true;
+      this.$refs.CreateList.isEdit = true;
+      this.$refs.CreateList.formData = {
+        ...this.$refs.CreateList.formData,
+        ...list,
+      };
     },
   },
   mounted() {

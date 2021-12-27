@@ -129,22 +129,44 @@ let api = {
 
     async deleteList(list) {
       let token = this.$store.getters.token;
-      let listToBeDeleted = list._id;
 
       try {
-        let res = await fetch(
-          `http://localhost:3000/api/list/${listToBeDeleted}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        });
         console.log(res);
       } catch (e) {
         console.error(e);
+      }
+    },
+
+    async updateList(list) {
+      console.log("running in api mixin", list);
+      let token = this.$store.getters.token;
+
+      delete list.createdAt;
+      delete list.createdBy;
+      delete list.newItem;
+      delete list.updatedAd;
+      delete list.__v;
+
+      try {
+        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(list),
+        });
+
+        console.log(res);
+      } catch (e) {
+        console.log(e);
       }
     },
   },

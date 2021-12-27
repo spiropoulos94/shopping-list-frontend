@@ -1,6 +1,6 @@
 <template>
   <div class="create-list-wrapper">
-    <el-button @click="dialogVisible = true" type="primary" icon="el-icon-plus"
+    <el-button @click="enableCreate" type="primary" icon="el-icon-plus"
       >Create new List</el-button
     >
     <el-button
@@ -18,17 +18,18 @@
     <el-dialog
       class="create-list-dialog"
       width="90%"
-      title="Create new shopping list"
+      :title="isEdit ? 'Edit list' : 'Create new shopping list'"
       :visible.sync="dialogVisible"
+      destroy-on-close
     >
       <el-form :model="formData">
         <el-form-item label="List Name">
-          <el-input v-model="formData.listName" autocomplete="off"></el-input>
+          <el-input v-model="formData.name" autocomplete="off"></el-input>
         </el-form-item>
         <!-- <el-form-item label="List Items">
           <div class="items-list">
             <span
-              v-for="(item, iindex) in formData.listItems"
+              v-for="(item, iindex) in formData.items"
               v-bind:key="iindex"
               >{{ item.name }}</span
             >
@@ -45,7 +46,7 @@
           ></el-button>
           <el-button
             @click="deleteEnabled = false"
-            v-if="deleteEnabled && formData.listItems.length"
+            v-if="deleteEnabled && formData.items.length"
             type="primary"
             icon="el-icon-close"
             circle
@@ -54,7 +55,7 @@
         <div class="items-list">
           <div
             class="list-item-wrapper"
-            v-for="(item, iindex) in formData.listItems"
+            v-for="(item, iindex) in formData.items"
             v-bind:key="iindex"
           >
             <span class="list-item">
@@ -93,20 +94,19 @@
 import api from "@/mixins/api";
 export default {
   name: "CreateList",
-  props: {
-    listToBeEdited: Object,
-  },
+  props: {},
   mixins: [api],
   data() {
     return {
       formData: {
         newItem: "",
-        listName: "",
-        listItems: [],
+        name: "",
+        items: [],
       },
       dialogVisible: false,
       deleteEnabled: false,
       listDeleteEnabled: false,
+      isEdit: true,
     };
   },
   watch: {
@@ -119,40 +119,48 @@ export default {
         }
       },
     },
-    listToBeEdited: {
-      handler(list) {
-        console.log("list to be edited", list);
-
-        this.formData.listName = list.name;
-        this.formData.listItems = list.items;
-        this.dialogVisible = true;
+    isEdit: {
+      handler(isEdit) {
+        console.log("isEdit watcher", isEdit);
+        if (!isEdit) {
+          this.formData = {
+            newItem: "",
+            name: "",
+            items: [],
+          };
+        }
       },
     },
   },
   methods: {
+    enableCreate() {
+      this.isEdit = false;
+      this.dialogVisible = true;
+    },
     submit() {
-      if (
-        this.formData.listItems.length &&
-        this.formData.listName.trim() !== ""
-      ) {
-        this.createList({
-          name: this.formData.listName,
-          notes: this.formData.notes || "",
-          items: this.formData.listItems,
-        });
+      if (this.formData.items.length && this.formData.name.trim() !== "") {
+        if (!this.isEdit) {
+          this.createList({
+            name: this.formData.name,
+            notes: this.formData.notes || "",
+            items: this.formData.items,
+          });
+        } else {
+          this.updateList(this.formData);
+        }
         this.getLists();
         this.dialogVisible = false;
       }
     },
     deleteItem(itemIndex) {
-      this.formData.listItems.splice(itemIndex, 1);
-      if (!this.formData.listItems.length) {
+      this.formData.items.splice(itemIndex, 1);
+      if (!this.formData.items.length) {
         this.deleteEnabled = false;
       }
     },
     addItemToList() {
       if (this.formData.newItem.trim() !== "") {
-        this.formData.listItems.push(this.formData.newItem);
+        this.formData.items.push(this.formData.newItem);
 
         this.formData.newItem = "";
       }
