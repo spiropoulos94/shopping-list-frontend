@@ -126,6 +126,27 @@ let api = {
         console.error(e);
       }
     },
+
+    async deleteList(list) {
+      let token = this.$store.getters.token;
+      let listToBeDeleted = list._id;
+
+      try {
+        let res = await fetch(
+          `http://localhost:3000/api/list/${listToBeDeleted}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(res);
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
 };
 

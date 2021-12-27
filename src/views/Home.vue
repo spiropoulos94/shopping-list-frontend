@@ -48,7 +48,7 @@
           <div class="button-wrapper">
             <el-button
               v-if="listDeleteStatus"
-              @click="deleteList($event, list)"
+              @click="remove($event, list)"
               :class="windowWidth < 500 ? 'isMobileButton' : 'isDesktopButton'"
               type="danger"
               icon="el-icon-delete"
@@ -84,8 +84,10 @@ export default {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
     },
-    deleteList(event, list) {
+    remove(event, list) {
       console.log("deleteList click", { list }, { event });
+      this.deleteList(list);
+      this.getLists();
       event.stopPropagation();
     },
     editList() {
