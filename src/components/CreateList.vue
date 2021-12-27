@@ -46,7 +46,7 @@
             v-bind:key="iindex"
           >
             <span class="list-item">
-              {{ item.name }}
+              {{ item }}
             </span>
             <el-button
               @click="deleteItem(iindex)"
@@ -70,9 +70,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >Save</el-button
-        >
+        <el-button type="primary" @click="submit">Save</el-button>
       </span>
       <!-- <pre>{{ formData }}</pre> -->
     </el-dialog>
@@ -80,28 +78,34 @@
 </template>
 
 <script>
+import api from "@/mixins/api";
 export default {
   name: "CreateList",
   props: {},
+  mixins: [api],
   data() {
     return {
       formData: {
         newItem: "",
         listName: "",
-        listItems: [
-          {
-            name: "random item",
-          },
-          {
-            name: "another item",
-          },
-        ],
+        listItems: [],
       },
-      dialogVisible: true, // check
+      dialogVisible: false,
       deleteEnabled: false,
     };
   },
   methods: {
+    submit() {
+      console.log("submited");
+      console.log(this.formData);
+      this.createList({
+        name: this.formData.listName,
+        notes: this.formData.notes || "",
+        items: this.formData.listItems,
+      });
+      this.getLists();
+      this.dialogVisible = false;
+    },
     deleteItem(itemIndex) {
       this.formData.listItems.splice(itemIndex, 1);
       if (!this.formData.listItems.length) {
@@ -110,9 +114,7 @@ export default {
     },
     addItemToList() {
       if (this.formData.newItem.trim() !== "") {
-        this.formData.listItems.push({
-          name: this.formData.newItem,
-        });
+        this.formData.listItems.push(this.formData.newItem);
 
         this.formData.newItem = "";
       }
@@ -142,7 +144,7 @@ export default {
   padding: 10px;
   text-align: end;
   width: 100%;
-  font-size: 1.2em;
+  font-size: 1.6em;
 }
 
 .list-bar {

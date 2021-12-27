@@ -76,7 +76,7 @@ let api = {
         console.error(e);
       }
     },
-    async getItems() {
+    async getLists() {
       let token = this.$store.getters.token;
       if (!token) {
         console.log("no token");
@@ -93,7 +93,35 @@ let api = {
 
         console.log(data);
 
-        this.$store.commit("setItems", data);
+        this.$store.commit("setLists", data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+
+    async createList(formData) {
+      let token = this.$store.getters.token;
+      if (!token) {
+        console.log("no token");
+        return;
+      }
+
+      console.log(JSON.stringify(formData));
+      try {
+        let res = await fetch("http://localhost:3000/api/list", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        let { data } = await res.json();
+
+        console.log(data);
+
+        // this.$store.commit("addList", data);
       } catch (e) {
         console.error(e);
       }

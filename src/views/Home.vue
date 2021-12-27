@@ -12,7 +12,6 @@
     <el-dialog
       :visible.sync="centerDialogVisible"
       :width="windowWidth < 600 ? '80%' : '40%'"
-      center
     >
       <span>Are you sure you want to exit?</span>
       <span slot="footer" class="dialog-footer">
@@ -29,7 +28,7 @@
       <div
         @click="editList"
         class="list"
-        v-for="list in shoppingLists"
+        v-for="list in $store.getters.lists"
         :key="list._id"
       >
         <el-card shadow="hover">
@@ -73,32 +72,6 @@ export default {
     return {
       centerDialogVisible: false,
       windowWidth: window.innerWidth,
-      shoppingLists: [
-        {
-          name: "Supermarket List",
-          items: ["Coffee", "Milk", "Sugar"],
-        },
-        {
-          name: "Groceries List",
-          items: ["Bananas", "Almonds", "Carrots"],
-        },
-        {
-          name: "Supermarket List",
-          items: ["Coffee", "Milk", "Sugar"],
-        },
-        {
-          name: "Groceries List",
-          items: ["Bananas", "Almonds", "Carrots"],
-        },
-        {
-          name: "Supermarket List",
-          items: ["Coffee", "Milk", "Sugar"],
-        },
-        {
-          name: "Groceries List",
-          items: ["Bananas", "Almonds", "Carrots"],
-        },
-      ],
     };
   },
   methods: {
@@ -111,12 +84,11 @@ export default {
       event.stopPropagation();
     },
     editList() {
-      console.log("editList click");
+      // console.log("editList click");
     },
   },
   mounted() {
-    this.getItems();
-    console.log(window.innerWidth);
+    this.getLists();
   },
   computed: {
     userFirstName() {
