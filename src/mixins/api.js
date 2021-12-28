@@ -8,7 +8,7 @@ let api = {
       throw { type: type, message: message };
     },
     async signUp(formData) {
-      let res = await fetch("http://localhost:3000/signup", {
+      let res = await fetch("https://kots-shopping-list.herokuapp.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,14 +30,17 @@ let api = {
     },
     async login(formData) {
       try {
-        let res = await fetch("http://localhost:3000/signin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(formData),
-        });
+        let res = await fetch(
+          "https://kots-shopping-list.herokuapp.com/signin",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(formData),
+          }
+        );
 
         let responseData = await res.json();
 
@@ -61,11 +64,14 @@ let api = {
         return;
       }
       try {
-        let res = await fetch("http://localhost:3000/api/user", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        let res = await fetch(
+          "https://kots-shopping-list.herokuapp.com/api/user",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
         let { data } = await res.json();
 
@@ -83,11 +89,14 @@ let api = {
         return;
       }
       try {
-        let res = await fetch("http://localhost:3000/api/list", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        let res = await fetch(
+          "https://kots-shopping-list.herokuapp.com/api/list",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
         let { data } = await res.json();
 
@@ -108,14 +117,17 @@ let api = {
 
       console.log(JSON.stringify(formData));
       try {
-        let res = await fetch("http://localhost:3000/api/list", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        let res = await fetch(
+          "https://kots-shopping-list.herokuapp.com/api/list",
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
 
         let { data } = await res.json();
 
@@ -131,13 +143,16 @@ let api = {
       let token = this.$store.getters.token;
 
       try {
-        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-        });
+        let res = await fetch(
+          `https://kots-shopping-list.herokuapp.com/api/list/${list._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         console.log(res);
       } catch (e) {
         console.error(e);
@@ -155,14 +170,17 @@ let api = {
       delete list.__v;
 
       try {
-        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
-          method: "PUT",
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(list),
-        });
+        let res = await fetch(
+          `https://kots-shopping-list.herokuapp.com/api/list/${list._id}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(list),
+          }
+        );
 
         console.log(res);
       } catch (e) {
