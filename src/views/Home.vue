@@ -86,14 +86,11 @@ export default {
       this.$store.commit("logout");
     },
     async remove(event, list) {
-      console.log("deleteList click", { list }, { event });
       event.stopPropagation();
       await this.deleteList(list);
       await this.getLists();
     },
     editList(list) {
-      console.log("editList click", { list });
-
       this.$refs.CreateList.dialogVisible = true;
       this.$refs.CreateList.isEdit = true;
       this.$refs.CreateList.formData = {

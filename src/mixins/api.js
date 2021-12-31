@@ -91,7 +91,7 @@ let api = {
 
         let { data } = await res.json();
 
-        console.log(data);
+        console.log("getLists", data);
 
         this.$store.commit("setLists", data);
       } catch (e) {
@@ -106,7 +106,6 @@ let api = {
         return;
       }
 
-      console.log(JSON.stringify(formData));
       try {
         let res = await fetch("http://localhost:3000/api/list", {
           method: "POST",

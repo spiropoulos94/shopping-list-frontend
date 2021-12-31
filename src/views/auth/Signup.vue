@@ -127,9 +127,6 @@ export default {
       });
     },
   },
-  mounted() {
-    // console.log("Sign up mounted");
-  },
 };
 </script>
 

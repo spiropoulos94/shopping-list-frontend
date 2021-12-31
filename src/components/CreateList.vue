@@ -123,7 +123,6 @@ export default {
     isEdit: {
       immediate: true,
       handler(isEdit) {
-        console.log("isEdit watcher", isEdit);
         if (!isEdit) {
           this.formData = {
             newItem: "",
