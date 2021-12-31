@@ -85,11 +85,11 @@ export default {
       this.centerDialogVisible = false;
       this.$store.commit("logout");
     },
-    remove(event, list) {
+    async remove(event, list) {
       console.log("deleteList click", { list }, { event });
-      this.deleteList(list);
-      this.getLists();
       event.stopPropagation();
+      await this.deleteList(list);
+      await this.getLists();
     },
     editList(list) {
       console.log("editList click", { list });

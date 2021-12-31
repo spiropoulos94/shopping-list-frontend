@@ -137,19 +137,19 @@ export default {
       this.isEdit = false;
       this.dialogVisible = true;
     },
-    submit() {
+    async submit() {
       if (this.formData.items.length && this.formData.name.trim() !== "") {
         if (!this.isEdit) {
-          this.createList({
+          await this.createList({
             name: this.formData.name,
             notes: this.formData.notes || "",
             items: this.formData.items,
           });
         } else {
-          this.updateList(this.formData);
+          await this.updateList(this.formData);
         }
-        this.getLists();
         this.dialogVisible = false;
+        await this.getLists();
       }
     },
     deleteItem(itemIndex) {
