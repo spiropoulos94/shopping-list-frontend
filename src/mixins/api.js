@@ -1,4 +1,11 @@
 // define a mixin object
+
+let targetLocalhost = false;
+
+let baseUrl = targetLocalhost
+  ? "http://localhost:3000"
+  : "https://kots-lists.netlify.app/";
+
 let api = {
   created() {
     // this.mixinTest();
@@ -8,7 +15,7 @@ let api = {
       throw { type: type, message: message };
     },
     async signUp(formData) {
-      let res = await fetch("http://localhost:3000/signup", {
+      let res = await fetch(`${baseUrl}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +37,7 @@ let api = {
     },
     async login(formData) {
       try {
-        let res = await fetch("http://localhost:3000/signin", {
+        let res = await fetch(`${baseUrl}/signin`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +68,7 @@ let api = {
         return;
       }
       try {
-        let res = await fetch("http://localhost:3000/api/user", {
+        let res = await fetch(`${baseUrl}/api/user`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -83,7 +90,7 @@ let api = {
         return;
       }
       try {
-        let res = await fetch("http://localhost:3000/api/list", {
+        let res = await fetch(`${baseUrl}/api/list`, {
           headers: {
             Authorization: "Bearer " + token,
           },
@@ -107,7 +114,7 @@ let api = {
       }
 
       try {
-        let res = await fetch("http://localhost:3000/api/list", {
+        let res = await fetch(`${baseUrl}/api/list`, {
           method: "POST",
           headers: {
             Authorization: "Bearer " + token,
@@ -130,7 +137,7 @@ let api = {
       let token = this.$store.getters.token;
 
       try {
-        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
+        let res = await fetch(`${baseUrl}/api/list/${list._id}`, {
           method: "DELETE",
           headers: {
             Authorization: "Bearer " + token,
@@ -154,7 +161,7 @@ let api = {
       delete list.__v;
 
       try {
-        let res = await fetch(`http://localhost:3000/api/list/${list._id}`, {
+        let res = await fetch(`${baseUrl}/api/list/${list._id}`, {
           method: "PUT",
           headers: {
             Authorization: "Bearer " + token,
