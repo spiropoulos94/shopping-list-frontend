@@ -103,6 +103,7 @@ export default {
         name: "",
         items: [],
       },
+
       dialogVisible: false,
       deleteEnabled: false,
       listDeleteEnabled: false,
@@ -147,6 +148,8 @@ export default {
             items: this.formData.items,
           });
           this.formData.name = "";
+          this.formData.newItem = "";
+          this.formData.items = [];
         } else {
           await this.updateList(this.formData);
         }
