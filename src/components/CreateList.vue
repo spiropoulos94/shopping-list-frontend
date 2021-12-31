@@ -120,6 +120,7 @@ export default {
       },
     },
     isEdit: {
+      immediate: true,
       handler(isEdit) {
         console.log("isEdit watcher", isEdit);
         if (!isEdit) {
@@ -145,6 +146,7 @@ export default {
             notes: this.formData.notes || "",
             items: this.formData.items,
           });
+          this.formData.name = "";
         } else {
           await this.updateList(this.formData);
         }
