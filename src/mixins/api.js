@@ -20,7 +20,7 @@ let api = {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        // credentials: "include",
         body: JSON.stringify(formData),
       });
 
@@ -42,7 +42,7 @@ let api = {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
+          // credentials: "include",
           body: JSON.stringify(formData),
         });
 
