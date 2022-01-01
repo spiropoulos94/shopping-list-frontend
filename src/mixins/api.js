@@ -4,7 +4,7 @@ let targetLocalhost = false;
 
 let baseUrl = targetLocalhost
   ? "http://localhost:3000" //local express host
-  : "https://kots-shopping-list.herokuapp.com/"; // live heroku backend
+  : "https://kots-shopping-list.herokuapp.com"; // live heroku backend
 
 let api = {
   created() {
