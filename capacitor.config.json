@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.app",
+  "appName": "shopping-list-mobile",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
